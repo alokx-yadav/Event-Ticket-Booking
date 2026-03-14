@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Successful</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>✅ Payment Successful!</h1>
+    <p><strong>Enter your complete details</strong> by clicking the button below:</p>
+    <a id="form-link" class="form-button" target="_blank">Fill Registration Form</a>
+    <p class="note">Your Name, Email, and Payment ID will be prefilled automatically.</p>
+  </div>
+
+  <script>
+    // Get values from URL: ?name=Alok&email=alok@gmail.com&payment_id=pay_xxx
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get("name") || "";
+    const email = urlParams.get("email") || "";
+    const paymentID = urlParams.get("payment_id") || "";
+
+    // Google Form base URL (your form ID)
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdXzlMhOTudzCmubG9ih3u5V375V4ClKZl_Ej0mhwOxxIrtvQ/viewform?usp=pp_url";
+
+    // Append prefilled fields
+    const formLink = `${GOOGLE_FORM_URL}
+      &entry.2005620554=${encodeURIComponent(name)}
+      &entry.1045781291=${encodeURIComponent(email)}
+      &entry.563989975=${encodeURIComponent(paymentID)}`;
+
+    // Set the link
+    document.getElementById("form-link").href = formLink;
+  </script>
+</body>
+</html>

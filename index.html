@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IIITM Ticket Booking</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🎫 Book Your Event Ticket</h1>
+    <form id="payment-form">
+      <label for="category">Category:</label>
+      <select id="category" required>
+        <option value="">-- Select Category --</option>
+        <option value="IIITM Student">IIITM Student</option>
+        <option value="Other College Student">Other College Student</option>
+      </select>
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" required placeholder="Your Full Name" />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required placeholder="you@example.com" />
+
+      <button type="submit">Pay Securely</button>
+    </form>
+    <div id="status"></div>
+  </div>
+
+
+
+  <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const name = urlParams.get("name");
+  const email = urlParams.get("email");
+  const paymentID = urlParams.get("payment_id");
+
+  // Replace with your real Google Form ID and entry codes
+  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfExampleFormID/viewform?usp=pp_url";
+
+  const prefillLink = `${GOOGLE_FORM_URL}
+    &entry.1234567890=${encodeURIComponent(name)}
+    &entry.9876543210=${encodeURIComponent(email)}
+    &entry.1122334455=${encodeURIComponent(paymentID)}`;
+
+  document.getElementById("form-link").href = prefillLink;
+</script>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
